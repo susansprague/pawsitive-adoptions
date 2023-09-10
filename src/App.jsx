@@ -1,5 +1,8 @@
 // src/App.jsx
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import AppNavbar from './components/Navbar';
+
 
 function App() {
   const pets = [
@@ -10,7 +13,9 @@ function App() {
 
   return (
     <div className="App">
+  
       <h1>Pawsitive Adoptions</h1>
+      <AppNavbar />
       <h2>Available Pets</h2>
       <ul>
         {pets.map((pet) => (
