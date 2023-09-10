@@ -2,6 +2,10 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AppNavbar from './components/Navbar';
+import AppPetCards from './components/PetCards';
+import { Container } from 'react-bootstrap';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 function App() {
@@ -17,17 +21,16 @@ function App() {
       <h1>Pawsitive Adoptions</h1>
       <AppNavbar />
       <h2>Available Pets</h2>
-      <ul>
+      <Container>
+        <Row>
         {pets.map((pet) => (
-          <li key={pet.id}>
-            <h3>{pet.name}</h3>
-            <p>Breed: {pet.breed}</p>
-            <button>Adopt</button>
-          </li>
+          <Col key={pet} xs={12} md={4} lg={3}>
+                <AppPetCards />
+          </Col>
         ))}
-      </ul>
+        </Row>
+      </Container>
     </div>
-  );
-}
+  )}
 
 export default App;
