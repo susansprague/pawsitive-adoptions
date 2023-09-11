@@ -2,23 +2,23 @@ const { gql } = require('apollo-server-express');
 
 // Define GraphQL types
 const typeDefs = gql`
-  type User {
+type User {
     _id: ID!
     username: String!
     email: String!
     # Action - Add more user fields as needed
-  }
+}
 
-  type Pet {
+type Pet {
     _id: ID!
     name: String!
     species: String!
     age: Int!
     owner: User!
     # Action - Add more pet fields as needed
-  }
+}
 
-  type Query {
+type Query {
     # Retrieve a list of all pets
     getPets: [Pet]!
     
@@ -27,9 +27,9 @@ const typeDefs = gql`
 
     # Retrieve the currently authenticated user (if any)
     me: User
-  }
+}
 
-  type Mutation {
+type Mutation {
     # Create a new pet
     addPet(name: String!, species: String!, age: Int!): Pet
 
@@ -44,7 +44,7 @@ const typeDefs = gql`
 
     # Log in an existing user
     login(email: String!, password: String!): User
-  }
+}
 `;
 
 module.exports = typeDefs;
