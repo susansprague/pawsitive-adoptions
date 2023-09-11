@@ -1,0 +1,25 @@
+type Pet {
+  id: ID!
+  name: String!
+  breed: String!
+  age: Int!
+  description: String
+}
+
+type Query {
+  getPets: [Pet]
+  getPet(id: ID!): Pet
+}
+
+type Mutation {
+  addPet(name: String!, breed: String!, age: Int!, description: String): Pet
+}
+
+type AuthPayload {
+  token: String!
+}
+
+type Mutation {
+  signUp(username: String!, password: String!): AuthPayload
+  signIn(username: String!, password: String!): AuthPayload
+}
