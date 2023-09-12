@@ -25,7 +25,7 @@ function App() {
         <Row>
         {pets.map((pet) => (
           <Col key={pet} xs={12} md={4} lg={3}>
-                <AppPetCards />
+                <AppPetCards />*/
           </Col>
         ))}
         </Row>
