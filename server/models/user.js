@@ -1,0 +1,1 @@
+// file would define the user model schema for MongoDB db using Mongoose as a library. - Dele 
