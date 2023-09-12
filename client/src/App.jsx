@@ -1,8 +1,8 @@
 // src/App.jsx
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AppNavbar from './components/Navbar';
-import AppPetCards from './components/PetCards';
+import AppNavbar from './components/React/Navbar';
+import AppPetCards from './components/React/PetCards';
 import { Container } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
