@@ -4,6 +4,7 @@ const { ApolloServer } = require('apollo-server-express');
 const typeDefs = require('./schema/schema.graphql');
 const resolvers = require('./resolvers/index');
 const { verifyToken } = require('./middleware/authentication');
+const { fetchPets } = require('./utils/petfinderAPI');
 
 // Load environment variables from .env
 require('dotenv').config();
@@ -36,7 +37,25 @@ const server = new ApolloServer({
 // Apply Apollo Server as middleware
 server.applyMiddleware({ app, path: '/graphql' });
 
-// Start the server
+// Set up Petfinder API credentials from environment variables
+const PETFINDER_API_KEY = process.env.PETFINDER_API_KEY;
+const PETFINDER_API_SECRET = process.env.PETFINDER_API_SECRET;
+
+// Use the fetchPets function to make API requests to Petfinder
+app.get('/getPets', async (req, res) => {
+  try {
+    // Make an API request to fetch pets using the utility function
+    const pets = await fetchPets(PETFINDER_API_KEY, PETFINDER_API_SECRET);
+
+    // Respond with the fetched pets
+    res.json(pets);
+  } catch (error) {
+    console.error('Error fetching pets from Petfinder:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Start the servers
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
