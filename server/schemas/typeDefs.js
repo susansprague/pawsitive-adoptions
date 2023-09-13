@@ -1,16 +1,16 @@
-const { gql } = require('apollo-server-express');
+import { gql } from 'apollo-server-express';
 
 // Define GraphQL types
 const typeDefs = gql`
 type User {
     _id: ID!
-    username: String!
+    first: String!
+    last: String!
     email: String!
     # Action - Add more user fields as needed
 }
 
 type Pet {
-    _id: ID!
     name: String!
     species: String!
     age: Int!
@@ -40,11 +40,11 @@ type Mutation {
     deletePet(id: ID!): Pet
 
     # Register a new user
-    register(username: String!, email: String!, password: String!): User
+    register(first: String!,last:String!, email: String!, password: String!): Auth
 
     # Log in an existing user
-    login(email: String!, password: String!): User
+    login(email: String!, password: String!): Auth
 }
 `;
 
-module.exports = typeDefs;
+export default typeDefs;
