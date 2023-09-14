@@ -1,6 +1,6 @@
-const express = require('express');
+import express, { json } from 'express';
 
-const { MongoClient } = require('mongodb');
+import { MongoClient } from 'mongodb';
 
 const app = express();
 const port = 27017
@@ -26,7 +26,7 @@ client.connect()
     console.log('Mongo connection error: ', err.message);
   });
 
-  app.use(express.json());
+  app.use(json());
 
   app.post('/create', (req, res) => {
     db.collection('dogsCollection').insertOne({

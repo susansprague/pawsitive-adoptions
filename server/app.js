@@ -1,10 +1,10 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const { ApolloServer } = require('apollo-server-express');
-const typeDefs = require('./schema/schema.graphql');
-const resolvers = require('./resolvers/index');
-const { verifyToken } = require('./middleware/authentication');
-const { fetchPets } = require('./utils/petfinderAPI');
+import express from 'express';
+import { connect, connection } from 'mongoose';
+import { ApolloServer } from 'apollo-server-express';
+import typeDefs from './schema/schema.graphql';
+import resolvers from './resolvers/index';
+import { verifyToken } from './middleware/authentication';
+import { fetchPets } from './utils/petfinderAPI';
 
 // Load environment variables from .env
 require('dotenv').config();
@@ -13,12 +13,12 @@ require('dotenv').config();
 const app = express();
 
 // Connect to MongoDB using Mongoose
-mongoose.connect(process.env.MONGODB_URI, {
+connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-mongoose.connection.on('error', (error) => {
+connection.on('error', (error) => {
   console.error('MongoDB Connection Error:', error);
 });
 
