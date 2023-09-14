@@ -1,111 +1,123 @@
-const { User, Pet } = require('../models'); // Import data models
-const { AuthenticationError } = require('apollo-server-express');
-const { signToken } = require('../utils/auth');
+import {
+    AuthenticationError,
+} from 'apollo-server-express'
+import {
+    User, Pet,
+} from '../models'
+
 
 const resolvers = {
-Query: {
-    getPets: async () => {
-    try {
-        // Fetch and return a list of all pets from database
-        const pets = await Pet.find();
-        return pets;
-    } catch (err) {
-        throw new Error(err);
-    }
-    },
-    getPet: async (_, { id }) => {
-    try {
-        // Fetch and return a specific pet by ID from database
-        const pet = await Pet.findById(id);
-        return pet;
-    } catch (err) {
-        throw new Error(err);
-    }
-    },
-    me: async (_, __, context) => {
-      // Check if the user is authenticated (token verification)
-    if (context.user) {
-        return await User.findById(context.user._id);
-    }
-    throw new AuthenticationError('Not authenticated');
-    },
-},
-Mutation: {
-    addPet: async (_, args) => {
-      // Check if the user is authenticated (token verification)
-    if (context.user) {
-        try {
-          // Create a new pet and associate it with the authenticated user
-        const newPet = await Pet.create({
-            ...args,
-            owner: context.user._id,
-        });
-        return newPet;
-        } catch (err) {
-        throw new Error(err);
+    Query: {
+
+        me: async (parent, args, context) => {
+            if (context.user) {
+                return User.findOne({ _id: context.user._id }).populate('pet');
+            }
+            throw AuthenticationError('You need to be logged in!');
+        },
+        getPet: async (parent, { id }, context) => {
+            if (context.user) {
+                return Pet.findOne({ _id: id }).populate('user');
+            } throw AuthenticationError('You need to be logged in!');
+        },
+        getPets: async (parent, args, context) => {
+            if (context.user) {
+                return Pet.find().populate('user');
+            } throw AuthenticationError('You need to be logged in!');
         }
-    }
-    throw new AuthenticationError('Not authenticated');
     },
-    updatePet: async (_, { id, ...updates }) => {
-      // Check if the user is authenticated (token verification)
-    if (context.user) {
-        try {
-          // Update an existing pet by ID
-        const updatedPet = await Pet.findByIdAndUpdate(id, updates, {
-            new: true,
-        });
-        return updatedPet;
-        } catch (err) {
-        throw new Error(err);
-        }
-    }
-    throw new AuthenticationError('Not authenticated');
+
+    Mutation: {
+        addUser: async (parent, { username, email, password }) => {
+            const user = await User.create({ username, email, password });
+            const token = signToken(user);
+            return { token, user };
+        },
+        login: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
+
+            if (!user) {
+                throw AuthenticationError;
+            }
+
+            const correctPw = await user.isCorrectPassword(password);
+
+            if (!correctPw) {
+                throw AuthenticationError;
+            }
+
+            const token = signToken(user);
+
+            return { token, user };
+        },
+        addThought: async (parent, { thoughtText }, context) => {
+            if (context.user) {
+                const thought = await Thought.create({
+                    thoughtText,
+                    thoughtAuthor: context.user.username,
+                });
+
+                await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { thoughts: thought._id } }
+                );
+
+                return thought;
+            }
+            throw AuthenticationError;
+            ('You need to be logged in!');
+        },
+        addComment: async (parent, { thoughtId, commentText }, context) => {
+            if (context.user) {
+                return Thought.findOneAndUpdate(
+                    { _id: thoughtId },
+                    {
+                        $addToSet: {
+                            comments: { commentText, commentAuthor: context.user.username },
+                        },
+                    },
+                    {
+                        new: true,
+                        runValidators: true,
+                    }
+                );
+            }
+            throw AuthenticationError;
+        },
+        removeThought: async (parent, { thoughtId }, context) => {
+            if (context.user) {
+                const thought = await Thought.findOneAndDelete({
+                    _id: thoughtId,
+                    thoughtAuthor: context.user.username,
+                });
+
+                await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { thoughts: thought._id } }
+                );
+
+                return thought;
+            }
+            throw AuthenticationError;
+        },
+        removeComment: async (parent, { thoughtId, commentId }, context) => {
+            if (context.user) {
+                return Thought.findOneAndUpdate(
+                    { _id: thoughtId },
+                    {
+                        $pull: {
+                            comments: {
+                                _id: commentId,
+                                commentAuthor: context.user.username,
+                            },
+                        },
+                    },
+                    { new: true }
+                );
+            }
+            throw AuthenticationError;
+        },
     },
-    deletePet: async (_, { id }) => {
-      // Check if the user is authenticated (token verification)
-    if (context.user) {
-        try {
-          // Delete a pet by ID and return the deleted pet
-        const deletedPet = await Pet.findByIdAndDelete(id);
-        return deletedPet;
-        } catch (err) {
-        throw new Error(err);
-        }
-    }
-    throw new AuthenticationError('Not authenticated');
-    },
-    register: async (_, { username, email, password }) => {
-    try {
-        // Create a new user
-        const user = await User.create({ username, email, password });
-        // Generate a JWT token for the newly registered user
-        const token = signToken(user);
-        return { token, user };
-    } catch (err) {
-        throw new Error(err);
-    }
-    },
-    login: async (_, { email, password }) => {
-    try {
-        // Find the user by email
-        const user = await User.findOne({ email });
-        if (!user) {
-        throw new AuthenticationError('User not found');
-        }
-        // Verify the password
-        const correctPassword = await user.isCorrectPassword(password);
-        if (!correctPassword) {
-        throw new AuthenticationError('Incorrect password');
-        }
-        // Generate a JWT token for the authenticated user
-        const token = signToken(user);
-        return { token, user };
-    } catch (err) {
-        throw new Error(err);
-    }
-    },
-},
 };
 
-module.exports = resolvers;
+export default resolvers;

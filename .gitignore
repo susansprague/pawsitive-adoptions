@@ -27,3 +27,7 @@ dist-ssr
 
 # Package lock file to ignore
 package-lock.json
+
+
+# api key and secret detailes to ignore
+.env
