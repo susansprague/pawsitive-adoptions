@@ -1,8 +1,8 @@
 // src/App.jsx
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AppNavbar from './components/Navbar';
-import AppPetCards from './components/PetCards';
+import AppNavbar from './components/React/Navbar';
+import AppPetCards from './components/React/PetCards';
 import { Container } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -25,7 +25,7 @@ function App() {
         <Row>
         {pets.map((pet) => (
           <Col key={pet} xs={12} md={4} lg={3}>
-                <AppPetCards />
+                <AppPetCards />*/
           </Col>
         ))}
         </Row>
