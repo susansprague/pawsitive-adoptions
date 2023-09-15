@@ -1,4 +1,4 @@
-// import { verify } from 'jsonwebtoken';
+// const { verify } =require('jsonwebtoken');
 
 // // Verify JWT token
 // const verifyToken = (token) => {
@@ -14,3 +14,5 @@
 // export default {
 //   verifyToken,
 // };
+
+module.exports = verifyToken
