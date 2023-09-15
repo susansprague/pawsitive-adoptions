@@ -5,6 +5,8 @@ const {
     User, Pet,
 } =require('../models')  
 
+const {fetchPets} = require("../utils/petfinderAPI")
+
 const resolvers = {
     Query: {
 
@@ -23,6 +25,13 @@ const resolvers = {
             if (context.user) {
                 return Pet.find().populate('user');
             } throw AuthenticationError('You need to be logged in!');
+        },
+        getAnimals:  async (parent, args, context) => {
+            const retrievedPets = await fetchPets();
+
+            console.log(retrievedPets);
+
+            return retrievedPets.animals;
         }
     },
 
