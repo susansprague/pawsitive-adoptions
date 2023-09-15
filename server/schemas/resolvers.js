@@ -1,10 +1,9 @@
-import {
+const {
     AuthenticationError,
-} from 'apollo-server-express'
-import {
+} =require('@apollo/server') 
+const {
     User, Pet,
-} from '../models'
-
+} =require('../models')  
 
 const resolvers = {
     Query: {
@@ -120,4 +119,4 @@ const resolvers = {
     },
 };
 
-export default resolvers;
+module.exports = resolvers;

@@ -1,3 +1,4 @@
-import User from './models/User.js';
-import Pet from './models/Pet.js';
-export default {User, Pet}
+module.exports={
+    User: require('./user.js'),
+    Pet: require('./Pet.js'),
+} 
