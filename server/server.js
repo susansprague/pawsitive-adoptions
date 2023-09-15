@@ -1,9 +1,10 @@
-import express from 'express';
-import connection from './config/connection.js';
-import { ApolloServer } from 'apollo-server-express';
-import { typeDefs, resolvers } from './schemas'; // Import schema
-// import { verifyToken } from './middleware/authentication'; // Import authentication middleware
+const express = require('express');
+const { ApolloServer } = require('@apollo/server');
+const { expressMiddleware } = require('@apollo/server/express4');
+const path = require('path');
 
+const { typeDefs, resolvers } = require('./schemas');
+const db = require('./config/connection');
 // // Load environment variables from .env
 // require('dotenv').config();
 
@@ -45,7 +46,7 @@ const PORT = process.env.PORT || 4000;
 
 // // Start the Node.js server
 
-connection.once('open', () => {
+db.once('open', () => {
   app.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
     console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);

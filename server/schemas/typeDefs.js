@@ -1,7 +1,5 @@
-import { gql } from 'apollo-server-express';
-
 // Define GraphQL types
-const typeDefs = gql`
+const typeDefs = `#graphql
 type User {
     _id: ID!
     first: String!
@@ -47,4 +45,4 @@ type Mutation {
 }
 `;
 
-export default typeDefs;
+module.exports = typeDefs;

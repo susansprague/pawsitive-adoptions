@@ -1,5 +1,5 @@
-import { Schema, model } from 'mongoose';
-import bcrypt from 'bcrypt';
+const { Schema, model } =require('mongoose') ;
+const bcrypt =require('bcrypt') ;
 
 // Schema to create User model
 const userSchema = new Schema(
@@ -73,4 +73,4 @@ userSchema
 // Initialize our User model
 const User = model('user', userSchema);
 
-export default User;
+module.exports = User;

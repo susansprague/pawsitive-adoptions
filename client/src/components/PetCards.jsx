@@ -1,16 +1,15 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-//import useState from "react";
+import useState from "react";
 import useEffect  from "react";
 
 function AppPetCards() {
-   // const [petData, setPetData] = useState ([])
+    const [petData, setPetData] = useState ([])
     useEffect(() => {
         const fetchData = async () => {
             const response = await fetch('PETFINDER API')
-            const petDataJson = await response.json()
-            console.log(petDataJson)
-          // setPetData(petDataJson.slice(0, 15))
+            const petData = await response.json()
+            setPetData(petData.slice(0, 15))
         }
         fetchData()
     }, [])
