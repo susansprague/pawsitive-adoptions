@@ -24,4 +24,6 @@ console.log(token)
     throw new Error(error.message);
   }
 }
+
+
 module.exports = { fetchPets };
