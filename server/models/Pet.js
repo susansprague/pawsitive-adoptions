@@ -1,4 +1,4 @@
-import {Schema, model} from'mongoose';
+const  {Schema, model} =require('mongoose');
 const petSchema = new Schema({
     name: {
         type: String,
@@ -19,4 +19,4 @@ const petSchema = new Schema({
 });
 const Pet = model('pet', petSchema);
 
-export default Pet;
+module.exports = Pet;
