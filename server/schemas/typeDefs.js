@@ -16,6 +16,12 @@ type Pet {
     # Action - Add more pet fields as needed
 }
 
+type Animal {
+    type: String
+    age: String
+    gender: String
+}
+
 type Query {
     # Retrieve a list of all pets
     getPets: [Pet]!
@@ -25,6 +31,9 @@ type Query {
 
     # Retrieve the currently authenticated user (if any)
     me: User
+
+    # Get all animals from API
+    getAnimals: [Animal]
 }
 
 type Mutation {

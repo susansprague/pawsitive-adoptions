@@ -4,7 +4,7 @@ const { expressMiddleware } = require('@apollo/server/express4');
 const path = require('path');
 
 const { typeDefs, resolvers } = require('./schemas');
-const db = require('./config/connection');
+// const db = require('./config/connection');
 // // Load environment variables from .env
 // require('dotenv').config();
 
@@ -37,18 +37,17 @@ const PORT = process.env.PORT || 4000;
 // // Apply Apollo Server as middleware
 // server.applyMiddleware({ app, path: '/graphql' });
 
-// // Define a route for other API endpoints (optional)
-// //app.get('/api/someendpoint', (req, res) => {
+// // Define a route for other API endpoints
+app.get('/api/someendpoint', (req, res) => {
   
-//   // Handle other API requests here
-//   //res.json({ message: 'Hello from the API!' });
-// //});
+  res.json({ message: 'Hello from the API!' });
+});
 
 // // Start the Node.js server
 
-db.once('open', () => {
+// db.once('open', () => {
   app.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
     console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
   });
-});
+// });
