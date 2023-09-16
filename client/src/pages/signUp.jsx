@@ -1,15 +1,20 @@
 import { useState } from 'react';
+import AppNavbar from '../components/React/Navbar';
 
-function AppLogIn() {
+function AppSignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your authentication logic here (e.g., API calls, validation)
+    // Add your user registration logic here (e.g., API calls, validation)
   };
 
   return (
+    <div>
+        <h1>Pawsitive Adoptions</h1>          
+  <AppNavbar />
+       <h3>Sign Up</h3>
     <form onSubmit={handleSubmit}>
       <div>
         <label>Email:</label>
@@ -29,9 +34,10 @@ function AppLogIn() {
           required
         />
       </div>
-      <button type="submit">Sign In</button>
+      <button type="submit">Sign Up</button>
     </form>
+    </div>
   );
 }
 
-export default AppLogIn;
+export default AppSignUp;
