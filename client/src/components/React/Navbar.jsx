@@ -8,7 +8,7 @@ function AppNavbar() {
 
   return (
     <Navbar bg="dark" variant="dark" expand="xl">
-      <Navbar.Brand href="#home">Welcome!</Navbar.Brand>
+      <Navbar.Brand href="#home"></Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ms-auto">
@@ -24,7 +24,8 @@ function AppNavbar() {
           </NavLink>
           <Nav.Link href="/about">About Us</Nav.Link>
           <Nav.Link href="/contact">Contact</Nav.Link>
-          <Nav.Link href="/signin">Sign-in</Nav.Link>
+          <Nav.Link href="/signin">Sign In</Nav.Link>
+          <Nav.Link href="/signup">Sign Un</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

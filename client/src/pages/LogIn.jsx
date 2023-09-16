@@ -1,4 +1,6 @@
 import AppNavbar from "../components/React/Navbar"
+import AppLogIn from "../components/auth/signIn"
+
 
 
 function AppSignIn (){
@@ -6,10 +8,8 @@ function AppSignIn (){
         <div>
         <h1>Pawsitive Adoptions</h1>          
   <AppNavbar />
-       <h2>Sign-in</h2>
-        <p>
-            Sample Text
-        </p>
+       <h2>Sign-In</h2>
+   <AppLogIn />
        </div>
     )
 }
