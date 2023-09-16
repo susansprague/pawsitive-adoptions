@@ -65,10 +65,10 @@ app.get('/read', (req, res) => {
     });
 });
 // Connect to MongoDB using Mongoose
-connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// connect(process.env.MONGODB_URI, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
 
 connection.on('error', (error) => {
   console.error('MongoDB Connection Error:', error);
@@ -96,6 +96,20 @@ app.get('/api/someendpoint', (req, res) => {
   res.json({ message: 'Hello from the API!' });
 });
 
+// Get request to read all the documents in a collection
+app.get('/read', (req, res) => {
+  db.collection('petCollection')
+    // find() returns all documents. Equivalent to `Select *` in SQL.
+    .find({})
+    // Returns all the documents in an array
+    .toArray()
+    // Sends results
+    .then(results => res.json(results))
+    // Handles error
+    .catch(err => {
+      if (err) throw err;
+    });
+});
 // Start the Node.js server
 
 db.once('open', () => {
