@@ -5,7 +5,8 @@ const {
     User, Pet,
 } =require('../models')  
 
-const {fetchPets} = require("../utils/petfinderAPI")
+// const {fetchPets} = require("../../client/src/services/petfinderAPI.cjs");
+
 
 const resolvers = {
     Query: {

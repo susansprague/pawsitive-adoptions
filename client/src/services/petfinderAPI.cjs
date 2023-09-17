@@ -1,4 +1,5 @@
-const axios = require ('axios');
+// const axios = require ('axios');
+import axios from "axios";
 
 // Function to fetch pets from the Petfinder API
 async function fetchPets() {
@@ -26,4 +27,5 @@ console.log(token)
 }
 
 
-module.exports = { fetchPets };
+// module.exports = { fetchPets };
+export default fetchPets;
