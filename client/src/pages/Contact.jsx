@@ -27,6 +27,7 @@ function AppContact (){
         Noah Salmon
       </ListGroup.Item>
       <ListGroup.Item action href="https://github.com/susansprague">
+      <img src="./images/Susan.jpeg" alt="Susan Sprague" className="developer-image" />
         Susan Sprague
       </ListGroup.Item>
 
