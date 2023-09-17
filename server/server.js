@@ -65,10 +65,10 @@ app.get('/read', (req, res) => {
     });
 });
 // Connect to MongoDB using Mongoose
-// connect(process.env.MONGODB_URI, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
+     connect(process.env.MONGODB_URI, {
+     useNewUrlParser: true,
+     useUnifiedTopology: true,
+   });
 
 connection.on('error', (error) => {
   console.error('MongoDB Connection Error:', error);
