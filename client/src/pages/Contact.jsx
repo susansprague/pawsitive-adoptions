@@ -11,6 +11,7 @@ function AppContact (){
        <h3>Developer's GitHubs</h3>
        <ListGroup>
       <ListGroup.Item action href="https://github.com/LeeAmick">
+      <img src="./images/Lee.jpeg" alt="Lee Amick" className="developer-image" />
         Lee Amick
       </ListGroup.Item>
       <ListGroup.Item action href="https://github.com/ayandele">
