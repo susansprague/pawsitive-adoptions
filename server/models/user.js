@@ -1,5 +1,6 @@
 const { Schema, model } =require('mongoose') ;
 const bcrypt =require('bcrypt') ;
+const { sign } = require('jsonwebtoken'); // Add this line
 
 // Schema to create User model
 const userSchema = new Schema(
@@ -31,8 +32,6 @@ const userSchema = new Schema(
             ref: 'pet',
         }
     ],
-    
-    
   },
   {
     // Mongoose supports two Schema options to transform Objects after querying MongoDb: toJSON and toObject.
@@ -43,6 +42,8 @@ const userSchema = new Schema(
     id: false,
   }
 );
+
+// Pre-save hook to hash the password
 userSchema.pre('save', async function (next) {
     if (this.isNew || this.isModified('password')) {
         const saltRounds = 10;
@@ -52,6 +53,7 @@ userSchema.pre('save', async function (next) {
     next();
 });
 
+// Method to check if the provided password is correct
 userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);
 };
@@ -69,6 +71,12 @@ userSchema
     const last = v.split(' ')[1];
     this.set({ first, last });
   });
+
+// function to generate JWT tokens
+userSchema.methods.generateAuthToken = function() {
+  const token = sign({ _id: this._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  return token;
+};
 
 // Initialize our User model
 const User = model('user', userSchema);
