@@ -25,7 +25,7 @@ function AppNavbar() {
           <Nav.Link href="/about">About Us</Nav.Link>
           <Nav.Link href="/contact">Contact</Nav.Link>
           <Nav.Link href="/signin">Sign In</Nav.Link>
-          <Nav.Link href="/signup">Sign Un</Nav.Link>
+          <Nav.Link href="/signup">Sign Up</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
