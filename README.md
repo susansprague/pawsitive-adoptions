@@ -4,6 +4,10 @@
 
 Pawsitive Adoptions is a web application designed to help users find pets for adoption, specifically focusing on cats and dogs. The application provides a platform where users can search for pets based on specific criteria, facilitating the process of adopting a new furry friend.
 
+## Website Screenshot
+
+![Screenshot 1](./client/public/images/Pawsitive%20adoptions.png)
+
 ### User Stories
 
 As a user, I want to:
