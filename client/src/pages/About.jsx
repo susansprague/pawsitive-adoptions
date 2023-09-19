@@ -8,7 +8,7 @@ function AppAbout (){
   <AppNavbar />
        <h2>About Us</h2>
         <p>
-            Sample Text
+            Thank you for visiting Pawsitive Adoptions. We hope you are able to find your forever companion! If you have any aditional questions, please feel free to visit the contact page and reach out to anyone listed there. 
         </p>
        </div>
     )
