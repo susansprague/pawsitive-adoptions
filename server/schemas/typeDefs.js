@@ -21,6 +21,10 @@ type Animal {
     age: String
     gender: String
 }
+type Auth {
+    token: ID!
+    user: User
+}
 
 type Query {
     # Retrieve a list of all pets
@@ -47,7 +51,7 @@ type Mutation {
     deletePet(id: ID!): Pet
 
     # Register a new user
-    register(first: String!,last:String!, email: String!, password: String!): Auth
+    addUser(first: String!,last:String!, email: String!, password: String!): Auth
 
     # Log in an existing user
     login(email: String!, password: String!): Auth
