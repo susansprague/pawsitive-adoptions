@@ -1,4 +1,5 @@
 import AppNavbar from "../components/React/Navbar"
+import './About.css';
 
 
 function AppAbout (){
