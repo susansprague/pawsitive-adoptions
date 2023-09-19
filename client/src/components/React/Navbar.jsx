@@ -12,17 +12,7 @@ function AppNavbar() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ms-auto">
-        <NavLink
-              to="/"
-              style={({ isActive, isPending }) => {
-                return {
-                  fontWeight: isActive ? "bold" : "",
-                };
-              }}
-            >
-              Home
-          </NavLink>
-          <Nav.Link href="/about">About Us</Nav.Link>
+        <NavLink to="/">Home</NavLink>
           <Nav.Link href="/contact">Contact</Nav.Link>
           <Nav.Link href="/signin">Sign In</Nav.Link>
           <Nav.Link href="/signup">Sign Un</Nav.Link>
